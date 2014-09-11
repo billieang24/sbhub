@@ -376,6 +376,10 @@ class Front extends Eden {
 			->parsePhp(dirname(__FILE__).'/front/error.phtml');
 	}
 	
+	public function orders() {
+		return new Orders($this->database());
+	}	
+	
 	/* Protected Methods
 	-------------------------------*/
 	protected function _getVariables($path, $pattern) {

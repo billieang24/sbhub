@@ -2,7 +2,7 @@
 return array (
 	'default' => array(
 		'host' 	=> '127.0.0.1',
-		'name' 	=> 'sbhub',
+		'name' 	=> 'sbhubdb',
 		'user' 	=> 'root',
 		'pass' 	=> '',
 		'type' 	=> 'mysql',
