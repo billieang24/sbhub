@@ -14,7 +14,7 @@
 	</div>
 	<hr class="line hr">
 	<div class="form">
-			<form>
+			<form method="post">
 				First Name: <input type="text" name="fname" class="form-control"/>
 				Last Name:  <input type="text" name="lname" class="form-control"/>
 				MI:  <input type="text" name="mi" class="form-control"/></br>
@@ -23,13 +23,13 @@
 				Facebook Acct: <input type="text" name="fb" class="form-control"/></br>
 				Contact No.: <input type="text" name="cno" class="form-control"/></br>
 				Mode of Payment:
-				 <input type="radio" name="mop" class="radio-inline"/> BPI 
-				 <input type="radio" name="mop" class="radio-inline"/> LBC
-				 <input type="radio" name="mop" class="radio-inline"/> Cebuana 
-				 <input type="radio" name="mop" class="radio-inline"/> Western
-				 <input type="radio" name="mop" class="radio-inline"/> Palawan </br></br>
-				Date of Payment: <input type="date" name="dop" class="space">
-				<button class="btn btn-danger btn-lg">Submit Order</button>
+				 <input type="radio" name="mop" class="radio-inline" value="bpi"/> BPI 
+				 <input type="radio" name="mop" class="radio-inline" value="lbc"/> LBC
+				 <input type="radio" name="mop" class="radio-inline" value="cebuana"/> Cebuana 
+				 <input type="radio" name="mop" class="radio-inline" value="western"/> Western
+				 <input type="radio" name="mop" class="radio-inline" value="palawan"/> Palawan </br>
+				Date of Payment: <input type="date" name="dop" class="space"></br>
+				<button class="btn btn-danger btn-lg" type="submit">Submit Order</button>
 			</form>
 	</div>
 </div>
