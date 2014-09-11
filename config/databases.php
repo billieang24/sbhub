@@ -1,9 +1,9 @@
 <?php //-->
 return array (
-	/*'default' => array(
+	'default' => array(
 		'host' 	=> '127.0.0.1',
-		'name' 	=> '',
-		'user' 	=> '',
+		'name' 	=> 'sbhub',
+		'user' 	=> 'root',
 		'pass' 	=> '',
 		'type' 	=> 'mysql',
-		'default' => true)*/);
+		'default' => true));
