@@ -379,6 +379,14 @@ class Front extends Eden {
 	public function orders() {
 		return new Orders($this->database());
 	}	
+
+	public function products() {
+		return new Products($this->database());
+	}	
+	
+	public function transactions() {
+		return new Transactions($this->database());
+	}	
 	
 	/* Protected Methods
 	-------------------------------*/

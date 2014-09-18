@@ -1,0 +1,46 @@
+<div class="categories">
+	<h4 class="title">Categories</h4>
+	<a href="/categories/onhand">Onhand Items</a>
+	<a href="/categories/soap">Soaps</a>
+	<a href="/categories/gadgets">Gadgets</a>
+	<a href="/categories/bags">Bags</a>
+	<a href="/categories/dress">Dresses</a>
+	<a href="/categories/skirts">Shorts/Skirts/Denim</a>
+	<a href="/categories/pants">Pants/Jeggings/Harem Pants</a>
+	<a href="/categories/tops">Tops/Loose Tops</a>
+	<a href="/categories/pullovers">Pullovers/Longsleeves</a>
+	<a href="/categories/jackets">Jackets/Cardigans/Blazers</a>
+	<a href="/categories/jumpshorts">Jumpshorts/Jumpsuits</a></br>
+</div>
+<div class="cat-album">
+	<h2 class="title"><?php echo ucfirst($category).'<br/>'; ?></h2>
+	<p class="title"><?php echo ucfirst($category).'<br/>'; ?></p>
+	<?php
+		foreach ($items as $key => $item):
+	?><div class="pic-album">
+		<div class="picture" id="<?php echo $item['product_id'] ?>">
+		<img src="<?php echo $item['product_image'] ?>" class="picture-inner"></br>
+		<?php echo $item['product_name'].'<br/>'; ?>
+		Size : S-M-L</br>
+		<button id="p1" class="btn btn-sm btn-danger">Add to Cart</button>
+		</div>
+	</div>
+	<?php
+	endforeach;
+	?>
+</div>
+<script type="text/javascript">
+jQuery(function($){
+	$(".btn").on("click",function(){
+		$.ajax({
+			type: "POST",
+			url: "index.php",
+			data: {id: $(this).parent().attr("id")}
+		}).done(function(){
+			alert("Successfully added item!");
+		}).fail(function(){
+			alert("Unable to add item!")
+		});
+	});
+});
+</script>

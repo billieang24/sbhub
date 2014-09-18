@@ -24,6 +24,14 @@ class Front_Page_Index extends Front_Page {
 	/* Public Methods
 	-------------------------------*/
 	public function render() {
+		$items = array();
+		if (!empty($_SESSION)){
+			foreach ($_SESSION['items'] as $key => $item) {
+				$items[] = front()->products()->getDetail($key);
+			}
+		}
+		$this->_body = array(
+			'items' => $items);
 		return $this->_page();
 	}
 	

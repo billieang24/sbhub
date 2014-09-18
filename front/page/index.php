@@ -14,7 +14,7 @@ class Front_Page_Index extends Front_Page {
 	/* Protected Properties
 	-------------------------------*/
 	protected $_title = 'Style and Beauty Hub';
-	protected $_class = 'home';
+	protected $_class = 'index';
 	protected $_template = '/index.phtml';
 	
 	/* Private Properties
@@ -24,6 +24,14 @@ class Front_Page_Index extends Front_Page {
 	/* Public Methods
 	-------------------------------*/
 	public function render() {
+		if (!empty($_POST)){
+			if (isset($_POST['id'])){
+				$_SESSION['items'][$_POST['id']] = $_POST['id'];
+			}
+			else{
+				unset($_SESSION['items'][$_POST['remove']]);
+			}
+		}
 		return $this->_page();
 	}
 	
