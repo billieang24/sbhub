@@ -20,8 +20,7 @@
 	?><div class="pic-album">
 		<div class="picture" id="<?php echo $item['product_id'] ?>">
 		<img src="<?php echo $item['product_image'] ?>" class="picture-inner"></br>
-		<?php echo $item['product_name'].'<br/>'; ?>
-		Size : S-M-L</br>
+		<?php echo $item['product_name'].'<br/>'.'Php '.$item['price'].'<br/>'; ?>
 		<button id="p1" class="btn btn-sm btn-danger">Add to Cart</button>
 		</div>
 	</div>
@@ -29,9 +28,12 @@
 	endforeach;
 	?>
 </div>
+<div class="pull-right">
+	<a href="/cart"><button class="btn btn-lg btn-warning">View Cart</button></a>
+</div>
 <script type="text/javascript">
 jQuery(function($){
-	$(".btn").on("click",function(){
+	$(".btn-danger").on("click",function(){
 		$.ajax({
 			type: "POST",
 			url: "index.php",
