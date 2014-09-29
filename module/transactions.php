@@ -23,17 +23,11 @@ class Transactions extends Eden_Class {
 		return $this;
 	}
 	
-	// public function getList($start, $end) {
-	// 	return $this->_database
-	// 		->search('user')
-	// 		->innerJoinOn('freetime','user_id=freetime_user')
-	// 		->leftJoinOn('booked','booked_freetime=freetime_id')
-	// 		->addFilter('booked_freetime is null')
-	// 		->addFilter('(freetime_start between \''.$start.'\' and \''.$end.'\')'.
-	// 			' and (freetime_end between \''.$start.'\' and \''.$end.'\')')
-	// 		->setGroup('user_id')
-	// 		->getRows();
-	// }
+	public function getList() {
+		return $this->_database
+			->search('transactions')
+			->getRows();
+	}
 	
 	// public function getDetail($id) {
 	// 	return $this->_database->getRow('user', 'user_id', $id);

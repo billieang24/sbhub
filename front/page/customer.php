@@ -24,6 +24,10 @@ class Front_Page_Index extends Front_Page {
 	/* Public Methods
 	-------------------------------*/
 	public function render() {
+		$transactions = front()->transactions()->getList();
+		$this->_body = array(
+				'transactions' => $transactions
+			);
 		return $this->_page();
 	}
 	
