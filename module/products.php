@@ -19,11 +19,18 @@ class Products extends Eden_Class {
 		return $this;
 	}
 	
-	public function getListByCategory($category) {
-		return $this->_database
-			->search('products')
-			->addFilter('category = "'.$category.'"')
-			->getRows();
+	public function getListByCategory($category = null) {
+		if ($category == null) {
+			return $this->_database
+				->search('products')
+				->getRows();
+		}
+		else {
+			return $this->_database
+				->search('products')
+				->addFilter('category = "'.$category.'"')
+				->getRows();
+		}
 	}
 
 	public function getDetail($id) {
@@ -45,11 +52,12 @@ class Products extends Eden_Class {
 	// 	return $this;
 	// }
 	
-	// public function remove($id) {
-	// 	$this->_database
-	// 		->model()
-	// 		->setUserId($id)
-	// 		->remove('user');
+	public function remove($id) {
+		$this->_database
+			->model()
+			->setProductId($id)
+			->remove('products');
+	}
 		
 	// 	return $this;
 	// }

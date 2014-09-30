@@ -14,7 +14,7 @@ class Front_Page_Index extends Front_Page {
 	/* Protected Properties
 	-------------------------------*/
 	protected $_title = 'Style and Beauty Hub';
-	protected $_class = 'home';
+	protected $_class = 'index';
 	protected $_template = '/customer.phtml';
 	
 	/* Private Properties

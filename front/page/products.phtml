@@ -1,0 +1,31 @@
+<a href="/admin?logout=1"><button>Log Out</button></a>
+<div class="cat-album">
+	<?php
+		foreach ($items as $key => $item):
+	?><div class="pic-album">
+		<div class="picture" id="<?php echo $item['product_id'] ?>">
+		<img src="<?php echo $item['product_image'] ?>" class="picture-inner"></br>
+		<?php echo $item['product_name'].'<br/>'.'Php '.$item['price'].'<br/>'; ?>
+		<button class="btn btn-sm btn-danger">Remove</button>
+		</div>
+	</div>
+	<?php
+	endforeach;
+	?>
+</div>
+<script type="text/javascript">
+jQuery(function($){
+	$(".btn-danger").on("click",function(){
+		$.ajax({
+			type: "POST",
+			url: "products",
+			data: {id: $(this).parent().attr("id")}
+		}).done(function(){
+			alert("Successfully removed item!");
+		}).fail(function(){
+			alert("Unable to remove item!")
+		});
+		$(this).parent().remove();
+	});
+});
+</script>

@@ -84,7 +84,7 @@ CREATE TABLE `orders` (
   `cust_dop` date DEFAULT NULL,
   `cust_cno` varchar(31) DEFAULT NULL,
   PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +93,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,'ang','billie','r','2 Kennedy Drive Pleasantview Subdivision Brgy. Tandang Sora','billieang24','billieang24','9269461088','0000-00-00',NULL),(2,'calamares','daday','m','laguna','dadayo','dadayofb','9061858788','0000-00-00',NULL),(3,'guerrero','jasper','c','q.c.','goryo','goryofb','9061858789','0000-00-00',NULL);
+INSERT INTO `orders` VALUES (1,'ang','billie','r','2 Kennedy Drive Pleasantview Subdivision Brgy. Tandang Sora','billieang24','billieang24','9269461088','0000-00-00',NULL),(2,'calamares','daday','m','laguna','dadayo','dadayofb','9061858788','0000-00-00',NULL),(3,'guerrero','jasper','c','q.c.','goryo','goryofb','9061858789','0000-00-00',NULL),(4,'calamares','daday','m','123','dayanarra','dayanarra','9061858788','0000-00-00',NULL);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -111,7 +111,7 @@ CREATE TABLE `products` (
   `product_image` varchar(255) DEFAULT NULL,
   `category` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -120,7 +120,6 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'pants',900,'/images/pants/IMG_37002291615965.jpeg','pants'),(2,'pants',300,'/images/pants/IMG_36997571625505.jpeg','pants'),(3,'6',600,'/images/6.jpg','bags'),(4,'first pullover',500,'/images/8.jpg','pullovers'),(5,'test',999,'/images/9.jpg','skirts');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -133,4 +132,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-09-29 13:59:17
+-- Dump completed on 2014-09-30 12:41:35

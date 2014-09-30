@@ -22,7 +22,7 @@ jQuery(function($){
 	$('.btn').on('click', function(){
 		$.ajax({
 			type: "POST",
-			url: "index.php",
+			url: "index",
 			data: {remove: $(this).parent().attr("id")},
 		}).done(function(){
 			alert("Successfully removed item!");

@@ -1,3 +1,4 @@
+<a href="/admin?logout=1"><button>Log Out</button></a>
 <form method="POST" enctype="multipart/form-data">
 <input type="file" name="file"/>
 Item Name<br/>
@@ -21,3 +22,10 @@ Item Category<br/>
 </select>
 <button class="btn-success btn" type="submit">Submit</button>
 </form>
+<script type="text/javascript">
+jQuery(function($){
+	$('.btn').on('click', function(){
+		alert("Successfully added item!");
+	});
+});
+</script>
