@@ -18,18 +18,18 @@
 <a href="/order"><button class="btn btn-success">Checkout</button></a>
 <a href="/categories/pants"><button class="btn btn-warning">Shop More!</button></a>
 <script type="text/javascript">
-jQuery(function($){
-	$('.btn').on('click', function(){
-		$.ajax({
-			type: "POST",
-			url: "index",
-			data: {remove: $(this).parent().attr("id")},
-		}).done(function(){
-			alert("Successfully removed item!");
-		}).fail(function(){
-			alert("Unable to remove item!")
+	jQuery(function($){
+		$('.btn').on('click', function(){
+			$.ajax({
+				type: "POST",
+				url: "index",
+				data: {remove: $(this).parent().attr("id")},
+			}).done(function(){
+				alert("Successfully removed item!");
+			}).fail(function(){
+				alert("Unable to remove item!")
+			});
+			$(this).parent().remove();
 		});
-		$(this).parent().remove();
 	});
-});
 </script>

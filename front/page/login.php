@@ -28,9 +28,9 @@ class Front_Page_Index extends Front_Page {
 			header('Location: admin');
 		}
 		if (isset($_POST['username'])) {
-			$user = front()->admins()->getList($_POST['username'], $_POST['password']);
+			$user = front()->admins()->getDetail($_POST['username'], $_POST['password']);
 			if (!empty($user)) {
-				$_SESSION['admin'] = $user[0]['username'];
+				$_SESSION['admin'] = $user['username'];
 				header('Location: admin');
 			}
 			else {

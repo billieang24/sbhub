@@ -1,31 +1,49 @@
 <a href="/admin?logout=1"><button>Log Out</button></a>
 <div class="cat-album">
-	<?php
-		foreach ($items as $key => $item):
-	?><div class="pic-album">
+	<?php foreach ($items as $key => $item): ?>
+	<div class="pic-album">
 		<div class="picture" id="<?php echo $item['product_id'] ?>">
-		<img src="<?php echo $item['product_image'] ?>" class="picture-inner"></br>
-		<?php echo $item['product_name'].'<br/>'.'Php '.$item['price'].'<br/>'; ?>
-		<button class="btn btn-sm btn-danger">Remove</button>
+			<img src="<?php echo $item['product_image'] ?>" class="picture-inner"></br>
+			<div class="description"><?php echo $item['product_name']; ?></div>
+			<br/>
+			<div class="price"><?php echo 'Php '.$item['price']; ?></div>
+			<br/>
+			<button class="btn btn-sm btn-success edit">Edit</button>
+			<button class="btn btn-sm btn-danger remove">Remove</button>
+		</div>
+		<div style="display:none" id="<?php echo $item['product_id'] ?>">
+			<img src="<?php echo $item['product_image'] ?>" class="picture-inner"></br>
+			<input type="text" name="description">
+			<input type="text" name="price">
+			<button class="btn btn-sm btn-success save">Save</button>
+			<button class="btn btn-sm btn-primary cancel">Cancel</button>
 		</div>
 	</div>
-	<?php
-	endforeach;
-	?>
+	<?php endforeach; ?>
 </div>
 <script type="text/javascript">
-jQuery(function($){
-	$(".btn-danger").on("click",function(){
-		$.ajax({
-			type: "POST",
-			url: "products",
-			data: {id: $(this).parent().attr("id")}
-		}).done(function(){
-			alert("Successfully removed item!");
-		}).fail(function(){
-			alert("Unable to remove item!")
+	jQuery(function($){
+		$(".remove").on("click",function(){
+			$.ajax({
+				type: "POST",
+				url: "products",
+				data: {id: $(this).parent().attr("id")}
+			}).done(function(){
+				alert("Successfully removed item!");
+			}).fail(function(){
+				alert("Unable to remove item!")
+			});
+			$(this).parent().remove();
 		});
-		$(this).parent().remove();
+		$(".edit").on("click",function(){
+			$(this).parent().hide();
+			$(this).parent().next().children("[name=description]").val($(this).parent().children(".description").html());
+			$(this).parent().next().children("[name=price]").val($(this).parent().children(".price").html());
+			$(this).parent().next().show();
+		});
+		$(".cancel").on("click",function(){
+			$(this).parent().hide();
+			$(this).parent().prev().show();
+		});
 	});
-});
 </script>

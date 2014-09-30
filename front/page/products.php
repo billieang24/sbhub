@@ -33,7 +33,7 @@ class Front_Page_Index extends Front_Page {
 		}
 		if (isset($_POST['id'])) {
 			$item = front()->products()->getDetail($_POST['id']);
-			unlink($item['product_image']);
+			unlink(dirname(__FILE__).'/../../web'.$item['product_image']);
 			front()->products()->remove($_POST['id']);
 			return $_POST;
 		}

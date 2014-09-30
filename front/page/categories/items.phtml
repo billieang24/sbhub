@@ -32,17 +32,17 @@
 	<a href="/cart"><button class="btn btn-lg btn-warning">View Cart</button></a>
 </div>
 <script type="text/javascript">
-jQuery(function($){
-	$(".btn-danger").on("click",function(){
-		$.ajax({
-			type: "POST",
-			url: "index",
-			data: {id: $(this).parent().attr("id")}
-		}).done(function(){
-			alert("Successfully added item!");
-		}).fail(function(){
-			alert("Unable to add item!")
+	jQuery(function($){
+		$(".btn-danger").on("click",function(){
+			$.ajax({
+				type: "POST",
+				url: "index",
+				data: {id: $(this).parent().attr("id")}
+			}).done(function(){
+				alert("Successfully added item!");
+			}).fail(function(){
+				alert("Unable to add item!")
+			});
 		});
 	});
-});
 </script>

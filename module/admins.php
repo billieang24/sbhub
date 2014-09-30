@@ -17,17 +17,16 @@ class Admins extends Eden_Class {
 		return $this;
 	}
 	
-	public function getList($user, $pass) {
+	// public function getList($user, $pass) {
+	// }
+	
+	public function getDetail($user, $pass) {
 		return $this->_database
 			->search('admins')
 			->addFilter('username = \''.$user.'\'')
 			->addFilter('password = \''.$pass.'\'')
-			->getRows();
+			->getRow();
 	}
-	
-	// public function getDetail($id) {
-	// 	return $this->_database->getRow('user', 'user_id', $id);
-	// }
 
 	// public function getDetailByUid($uid) {
 	// 	return $this->_database->getRow('user', 'uid', $uid);
