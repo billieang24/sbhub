@@ -31,9 +31,6 @@ class Front_Page_Index extends Front_Page {
 			session_destroy();
 			header('Location: login');
 		}
-		if (!empty($_POST)) {
-			return '<pre>'.print_r($_POST,1).'</pre>';
-		}
 		if (isset($_POST['id'])) {
 			$item = front()->products()->getDetail($_POST['id']);
 			unlink(dirname(__FILE__).'/../../web'.$item['product_image']);
@@ -42,6 +39,7 @@ class Front_Page_Index extends Front_Page {
 		}
 		$items = front()->products()->getListByCategory();
 		$this->_body = array(
+			'test'		=>	'<pre>'.print_r($_FILES,1).'</pre>'.'<pre>'.print_r($_POST,1).'</pre>',
 			'items' 	=> 	$items);
 		return $this->_page();
 	}

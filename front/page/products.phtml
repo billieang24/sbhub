@@ -1,3 +1,4 @@
+<h1><?php echo $test; ?></h1>
 <a href="/admin?logout=1"><button>Log Out</button></a>
 <div class="cat-album">
 	<?php foreach ($items as $key => $item): ?>
@@ -12,12 +13,12 @@
 			<button class="btn btn-sm btn-danger remove">Remove</button>
 		</div>
 		<div style="display:none" id="<?php echo $item['product_id'] ?>">
-			<img src="<?php echo $item['product_image'] ?>" class="picture-inner"></br>
-			<input type="file"/>
-			<input type="text" name="description"/>
-			<input type="text" name="price"/>
-			<button class="btn btn-sm btn-success save">Save</button>
-			<button class="btn btn-sm btn-primary cancel">Cancel</button>
+				<img src="<?php echo $item['product_image'] ?>" class="picture-inner"></br>
+				<input type="file"/>
+				<input type="text" name="description"/>
+				<input type="text" name="price"/>
+				<button class="btn btn-sm btn-success save">Save</button>
+				<button class="btn btn-sm btn-primary cancel">Cancel</button>
 		</div>
 	</div>
 	<?php endforeach; ?>
@@ -25,10 +26,6 @@
 <script type="text/javascript">
 	jQuery(function($){
 		$(".save").on("click",function(){
-			// if ($("input[type='file']")[0].files.length == 0) {
-			// 	alert("Please choose an image to be uploaded");
-			// }
-			// else 
 			if ($(this).parent().children("input[name='description']").val().trim() == "") {
 				alert("Please specify an item description");
 			}
@@ -40,10 +37,21 @@
 				alert("Please specify a valid positive item price");
 			}
 			else {
-				var file = $(this).parent().children("input[type='file']")[0].files[0]
-				var xhr = new XMLHttpRequest();
-	    		xhr.open("post", "products", true);
-    			xhr.send(file);
+				var fd = new FormData();
+				if ($(this).parent().children("input[type='file']")[0].files.length == 1) {
+					fd.append("image",$(this).parent().children("input[type='file']")[0].files[0]);
+				}
+				fd.append("description", $(this).prev().prev().val());
+				fd.append("price", $(this).prev().val())
+				$.ajax({
+	              url: "products",
+	              type: "POST",
+	              data: fd,
+	              processData: false,
+	              contentType: false
+	            }).done(function( data ) {
+	                console.log( data );
+	            });
 			}
 		});
 		$(".remove").on("click",function(){
@@ -67,6 +75,12 @@
 		$(".cancel").on("click",function(){
 			$(this).parent().hide();
 			$(this).parent().prev().show();
+		});
+		$("input[type='file']").on("change", function() {
+			if ($(this)[0].files[0].type.search(/jpeg|png|gif/) == -1) {
+				alert("Chosen file is not an image!");
+				$(this).replaceWith($(this).val("").clone(true));
+			}
 		});
 	});
 </script>

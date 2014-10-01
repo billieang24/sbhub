@@ -48,7 +48,7 @@
 		$("input[type='file']").on("change", function() {
 			if ($(this)[0].files[0].type.search(/jpeg|png|gif/) == -1) {
 				alert("Chosen file is not an image!");
-				$(this).parent().trigger("reset");
+				$(this).replaceWith($(this).val("").clone(true));
 			}
 		});
 	});
