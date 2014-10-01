@@ -36,21 +36,28 @@ class Products extends Eden_Class {
 	public function getDetail($id) {
 		return $this->_database->getRow('products', 'product_id', $id);
 	}
-
-	// public function getDetailByUid($uid) {
-	// 	return $this->_database->getRow('user', 'uid', $uid);
-	// }
 	
-	// public function update($id, $name, $email) {
-	// 	$this->_database
-	// 		->model()
-	// 		->setUserId($id)
-	// 		->setUserName($name)
-	// 		->setUserEmail($email)
-	// 		->save('user');
+	public function update($id, $description, $price, $image = null) {
+		if ($image == null) {
+			$this->_database
+				->model()
+				->setProductId($id)
+				->setProductDescription($description)
+				->setPrice($price)
+				->save('products');
+		}
+		else {
+			$this->_database
+				->model()
+				->setProductId($id)
+				->setProductDescription($description)
+				->setPrice($price)
+				->setProductImage($image)
+				->save('products');
+		}
 		
-	// 	return $this;
-	// }
+		return $this;
+	}
 	
 	public function remove($id) {
 		$this->_database
@@ -58,7 +65,4 @@ class Products extends Eden_Class {
 			->setProductId($id)
 			->remove('products');
 	}
-		
-	// 	return $this;
-	// }
 }

@@ -24,14 +24,27 @@ class Front_Page_Index extends Front_Page {
 	/* Public Methods
 	-------------------------------*/
 	public function render() {
-		if (!isset($_SESSION['admin'])){
+		if (!isset($_SESSION['admin'])) {
 			header('Location: login');
 		}
-		if (isset($_GET['logout'])){
+		if (isset($_GET['logout'])) {
 			session_destroy();
 			header('Location: login');
 		}
-		if (isset($_POST['id'])) {
+		if (isset($_POST['description'])) {
+			if (isset($_FILES['image'])) {
+				$item = front()->products()->getDetail($_POST['id']);
+				unlink(dirname(__FILE__).'/../../web'.$item['product_image']);
+				front()->products()->update($_POST['id'],$_POST['description'], $_POST['price'], '/images/'.$_FILES['image']['name']);
+				if (move_uploaded_file($_FILES['image']['tmp_name'], dirname(__FILE__).'/../../web/images/'.$_FILES['image']['name'])) {
+					return 'true';
+				}
+			}
+			else {
+				front()->products()->update($_POST['id'],$_POST['description'], $_POST['price']);
+			}
+		}
+		else if (isset($_POST['id'])) {
 			$item = front()->products()->getDetail($_POST['id']);
 			unlink(dirname(__FILE__).'/../../web'.$item['product_image']);
 			front()->products()->remove($_POST['id']);
@@ -39,7 +52,6 @@ class Front_Page_Index extends Front_Page {
 		}
 		$items = front()->products()->getListByCategory();
 		$this->_body = array(
-			'test'		=>	'<pre>'.print_r($_FILES,1).'</pre>'.'<pre>'.print_r($_POST,1).'</pre>',
 			'items' 	=> 	$items);
 		return $this->_page();
 	}

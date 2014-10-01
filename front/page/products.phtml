@@ -1,4 +1,3 @@
-<h1><?php echo $test; ?></h1>
 <a href="/admin?logout=1"><button>Log Out</button></a>
 <div class="cat-album">
 	<?php foreach ($items as $key => $item): ?>
@@ -42,16 +41,19 @@
 					fd.append("image",$(this).parent().children("input[type='file']")[0].files[0]);
 				}
 				fd.append("description", $(this).prev().prev().val());
-				fd.append("price", $(this).prev().val())
+				fd.append("price", $(this).prev().val());
+				fd.append("id", $(this).parent().attr("id"));
 				$.ajax({
 	              url: "products",
 	              type: "POST",
 	              data: fd,
 	              processData: false,
 	              contentType: false
-	            }).done(function( data ) {
-	                console.log( data );
-	            });
+	            })
+				$(this).parent().prev().children(".description").html($(this).parent().children("[name=description]").val());
+				$(this).parent().prev().children(".price").html("Php "+$(this).parent().children("[name=price]").val());
+				$(this).parent().hide();
+				$(this).parent().prev().show();
 			}
 		});
 		$(".remove").on("click",function(){
@@ -69,7 +71,7 @@
 		$(".edit").on("click",function(){
 			$(this).parent().hide();
 			$(this).parent().next().children("[name=description]").val($(this).parent().children(".description").html());
-			$(this).parent().next().children("[name=price]").val($(this).parent().children(".price").html().substr(3));
+			$(this).parent().next().children("[name=price]").val($(this).parent().children(".price").html().substr(4));
 			$(this).parent().next().show();
 		});
 		$(".cancel").on("click",function(){
