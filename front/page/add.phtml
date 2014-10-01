@@ -29,15 +29,15 @@
 				alert("Please choose an image to be uploaded");
 				e.preventDefault();
 			}
-			else if ($("input[name='description']").val() == "") {
+			else if ($("input[name='description']").val().trim() == "") {
 				alert("Please specify an item description");
 				e.preventDefault();
 			}
-			else if ($("input[name='price']").val() == "") {
+			else if ($("input[name='price']").val().trim() == "") {
 				alert("Please specify an item price");
 				e.preventDefault();
 			}
-			else if ($("input[name='price']").val().search(/[^.0-9]/) != -1 || isNaN($("input[name='price']").val())) {
+			else if ($("input[name='price']").val().trim().search(/[^.0-9]/) != -1 || isNaN($("input[name='price']").val().trim())) {
 				alert("Please specify a valid positive item price");
 				e.preventDefault();
 			}

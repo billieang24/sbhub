@@ -7,10 +7,10 @@ class Products extends Eden_Class {
 		$this->_database = $database;
 	}
 	
-	public function create($name, $price, $image, $category) {
+	public function create($description, $price, $image, $category) {
 		$this->_database
 			->model()
-			->setProductName($name)
+			->setProductDescription($description)
 			->setProductImage($image)
 			->setPrice($price)
 			->setCategory($category)

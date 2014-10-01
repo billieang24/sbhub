@@ -4,7 +4,7 @@
 	<div class="pic-album">
 		<div class="picture" id="<?php echo $item['product_id'] ?>">
 			<img src="<?php echo $item['product_image'] ?>" class="picture-inner"></br>
-			<div class="description"><?php echo $item['product_name']; ?></div>
+			<div class="description"><?php echo $item['product_description']; ?></div>
 			<br/>
 			<div class="price"><?php echo 'Php '.$item['price']; ?></div>
 			<br/>
@@ -13,8 +13,9 @@
 		</div>
 		<div style="display:none" id="<?php echo $item['product_id'] ?>">
 			<img src="<?php echo $item['product_image'] ?>" class="picture-inner"></br>
-			<input type="text" name="description">
-			<input type="text" name="price">
+			<input type="file"/>
+			<input type="text" name="description"/>
+			<input type="text" name="price"/>
 			<button class="btn btn-sm btn-success save">Save</button>
 			<button class="btn btn-sm btn-primary cancel">Cancel</button>
 		</div>
@@ -23,6 +24,28 @@
 </div>
 <script type="text/javascript">
 	jQuery(function($){
+		$(".save").on("click",function(){
+			// if ($("input[type='file']")[0].files.length == 0) {
+			// 	alert("Please choose an image to be uploaded");
+			// }
+			// else 
+			if ($(this).parent().children("input[name='description']").val().trim() == "") {
+				alert("Please specify an item description");
+			}
+			else if ($(this).parent().children("input[name='price']").val().trim() == "") {
+				alert("Please specify an item price");
+			}
+			else if ($(this).parent().children("input[name='price']").val().trim().search(/[^.0-9]/) != -1 
+				|| isNaN($(this).parent().children("input[name='price']").val().trim())) {
+				alert("Please specify a valid positive item price");
+			}
+			else {
+				var file = $(this).parent().children("input[type='file']")[0].files[0]
+				var xhr = new XMLHttpRequest();
+	    		xhr.open("post", "products", true);
+    			xhr.send(file);
+			}
+		});
 		$(".remove").on("click",function(){
 			$.ajax({
 				type: "POST",
@@ -38,7 +61,7 @@
 		$(".edit").on("click",function(){
 			$(this).parent().hide();
 			$(this).parent().next().children("[name=description]").val($(this).parent().children(".description").html());
-			$(this).parent().next().children("[name=price]").val($(this).parent().children(".price").html());
+			$(this).parent().next().children("[name=price]").val($(this).parent().children(".price").html().substr(3));
 			$(this).parent().next().show();
 		});
 		$(".cancel").on("click",function(){
