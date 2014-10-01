@@ -1,8 +1,8 @@
 <a href="/admin?logout=1"><button>Log Out</button></a>
 <form method="POST" enctype="multipart/form-data">
 	<input type="file" name="file"/>
-	Item Name<br/>
-	<input type="text" name="name"/><br/>
+	Item Description<br/>
+	<input type="text" name="description"/><br/>
 	Item Price<br/>
 	<input type="text" name="price"/><br/>
 	Item Category<br/>
@@ -20,12 +20,36 @@
 		<option value="bags">Bags</option>
 		<option value="pants">Pants</option>
 	</select>
-	<button class="btn-success btn" type="submit">Submit</button>
+	<button class="btn-success btn submit" type="submit">Submit</button>
 </form>
 <script type="text/javascript">
-	jQuery(function($){
-		$('.btn').on('click', function(){
-			alert("Successfully added item!");
+	jQuery(function($) {
+		$(".submit").on("click", function(e) {
+			if ($("input[type='file']")[0].files.length == 0) {
+				alert("Please choose an image to be uploaded");
+				e.preventDefault();
+			}
+			else if ($("input[name='description']").val() == "") {
+				alert("Please specify an item description");
+				e.preventDefault();
+			}
+			else if ($("input[name='price']").val() == "") {
+				alert("Please specify an item price");
+				e.preventDefault();
+			}
+			else if ($("input[name='price']").val().search(/[^.0-9]/) != -1 || isNaN($("input[name='price']").val())) {
+				alert("Please specify a valid positive item price");
+				e.preventDefault();
+			}
+			else {
+				alert("Successfully added item!");
+			}
+		});
+		$("input[type='file']").on("change", function() {
+			if ($(this)[0].files[0].type.search(/jpeg|png|gif/) == -1) {
+				alert("Chosen file is not an image!");
+				$(this).parent().trigger("reset");
+			}
 		});
 	});
 </script>

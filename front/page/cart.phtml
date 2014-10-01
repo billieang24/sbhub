@@ -1,7 +1,7 @@
 <div class="album">
 	<div class="page-header">
 		<center>
-			<h3>Shopping Cart</h3>
+			<h3>Shopping Cart <?php print_r($test); ?></h3>
 			<strong>Selected items</strong>
 		</center>
 	</div>
@@ -19,7 +19,7 @@
 <a href="/categories/pants"><button class="btn btn-warning">Shop More!</button></a>
 <script type="text/javascript">
 	jQuery(function($){
-		$('.btn').on('click', function(){
+		$(".btn").on("click", function(){
 			$.ajax({
 				type: "POST",
 				url: "index",
