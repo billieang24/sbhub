@@ -1,25 +1,25 @@
 <a href="/admin?logout=1"><button>Log Out</button></a>
 <div class="cat-album">
 	<?php foreach ($items as $key => $item): ?>
-	<div class="pic-album">
-		<div class="picture" id="<?php echo $item['product_id'] ?>">
-			<img src="<?php echo $item['product_image'] ?>" class="picture-inner"></br>
-			<div class="description"><?php echo $item['product_description']; ?></div>
-			<br/>
-			<div class="price"><?php echo 'Php '.$item['price']; ?></div>
-			<br/>
-			<button class="btn btn-sm btn-success edit">Edit</button>
-			<button class="btn btn-sm btn-danger remove">Remove</button>
-		</div>
-		<div style="display:none" id="<?php echo $item['product_id'] ?>">
+		<div class="pic-album">
+			<div class="picture" id="<?php echo $item['product_id'] ?>">
+				<img src="<?php echo $item['product_image'] ?>" class="picture-inner"/></br>
+				<div class="description"><?php echo $item['product_description']; ?></div>
+				<br/>
+				<div class="price"><?php echo 'Php '.$item['price']; ?></div>
+				<br/>
+				<button class="btn btn-sm btn-success edit">Edit</button>
+				<button class="btn btn-sm btn-danger remove">Remove</button>
+			</div>
+			<div style="display:none" id="<?php echo $item['product_id'] ?>">
 				<img src="<?php echo $item['product_image'] ?>" class="picture-inner"></br>
 				<input type="file"/>
 				<input type="text" name="description"/>
 				<input type="text" name="price"/>
 				<button class="btn btn-sm btn-success save">Save</button>
 				<button class="btn btn-sm btn-primary cancel">Cancel</button>
+			</div>
 		</div>
-	</div>
 	<?php endforeach; ?>
 </div>
 <script type="text/javascript">
