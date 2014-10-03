@@ -3,7 +3,7 @@
 	<?php foreach ($items as $key => $item): ?>
 		<div class="pic-album">
 			<div class="picture" id="<?php echo $item['product_id'] ?>">
-				<img src="<?php echo $item['product_image'] ?>" class="picture-inner"/></br>
+				<img src="<?php echo $item['product_image'] ?>" class="picture-inner original"/></br>
 				<div class="description"><?php echo $item['product_description']; ?></div>
 				<br/>
 				<div class="price"><?php echo 'Php '.$item['price']; ?></div>
@@ -12,7 +12,7 @@
 				<button class="btn btn-sm btn-danger remove">Remove</button>
 			</div>
 			<div style="display:none" id="<?php echo $item['product_id'] ?>">
-				<img src="<?php echo $item['product_image'] ?>" class="picture-inner"></br>
+				<img src="<?php echo $item['product_image'] ?>" class="picture-inner upload"></br>
 				<input type="file"/>
 				<input type="text" name="description"/>
 				<input type="text" name="price"/>
@@ -33,10 +33,12 @@
 			}
 			else if ($(this).parent().children("input[name='price']").val().trim().search(/[^.0-9]/) != -1 
 				|| isNaN($(this).parent().children("input[name='price']").val().trim())) {
-				alert("Please specify a valid positive item price");
+				alert("Please specify a valid positive item price without commas");
 			}
 			else {
 				var fd = new FormData();
+				var price = $(this).parent().children("[name=price]").val();
+				// price = number_format(price,2,".",",");
 				if ($(this).parent().children("input[type='file']")[0].files.length == 1) {
 					fd.append("image",$(this).parent().children("input[type='file']")[0].files[0]);
 				}
@@ -51,7 +53,8 @@
 	              contentType: false
 	            })
 				$(this).parent().prev().children(".description").html($(this).parent().children("[name=description]").val());
-				$(this).parent().prev().children(".price").html("Php "+$(this).parent().children("[name=price]").val());
+				$(this).parent().prev().children(".price").html("Php "+ price);
+                $(this).parent().prev().children(".original").attr("src", $(".upload").attr("src"));
 				$(this).parent().hide();
 				$(this).parent().prev().show();
 			}
@@ -83,6 +86,41 @@
 				alert("Chosen file is not an image!");
 				$(this).replaceWith($(this).val("").clone(true));
 			}
+			if ($(this)[0].files && $(this)[0].files[0]) {
+	            var reader = new FileReader();
+	            var file = $(this); 
+	            reader.onload = function (e) {
+	                file.parent().children("img").attr("src", e.target.result);
+	            };
+	            reader.readAsDataURL($(this)[0].files[0]);
+	        }
 		});
 	});
+	function number_format(number, decimals, dec_point, thousands_sep) {
+	  number = (number + '')
+	    .replace(/[^0-9+\-Ee.]/g, '');
+	  var n = !isFinite(+number) ? 0 : +number,
+	    prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+	    sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+	    dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+	    s = '',
+	    toFixedFix = function(n, prec) {
+	      var k = Math.pow(10, prec);
+	      return '' + (Math.round(n * k) / k)
+	        .toFixed(prec);
+	    };
+	  // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+	  s = (prec ? toFixedFix(n, prec) : '' + Math.round(n))
+	    .split('.');
+	  if (s[0].length > 3) {
+	    s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+	  }
+	  if ((s[1] || '')
+	    .length < prec) {
+	    s[1] = s[1] || '';
+	    s[1] += new Array(prec - s[1].length + 1)
+	      .join('0');
+	  }
+	  return s.join(dec);
+	}
 </script>

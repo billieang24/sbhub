@@ -38,7 +38,7 @@
 				e.preventDefault();
 			}
 			else if ($("input[name='price']").val().trim().search(/[^.0-9]/) != -1 || isNaN($("input[name='price']").val().trim())) {
-				alert("Please specify a valid positive item price");
+				alert("Please specify a valid positive item price without commas");
 				e.preventDefault();
 			}
 			else {
