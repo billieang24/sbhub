@@ -1,12 +1,15 @@
-<a href="/admin?logout=1"><button>Log Out</button></a>
-<a href="add">Add</a>
-<a href="products">Products</a>
+<a href="/admin?logout=1"><button>Log Out</button></a> &nbsp;
+<a href="add">Add Items</a> &nbsp;
+<a href="products">View/Edit Products</a> &nbsp;
 <a href="admin">Home</a>
 <div class="success">Successfully added item!</div>
 <form method="POST" enctype="multipart/form-data">
 	<img class="picture-inner" style="display: none;"/></br>
 	<input type="file" name="file"/>
 	<div class="image error">
+		Please choose an image to be uploaded
+	</div><br/>
+	<div class="invalid-image error">
 		Please choose an image to be uploaded
 	</div><br/>
 	Item Description<br/>
@@ -95,8 +98,9 @@
 		});
 		$("input[type='file']").on("change", function() {
 			if ($(this)[0].files[0].type.search(/jpeg|png|gif/) == -1) {
-				alert("Chosen file is not an image!");
+				$(".invalid-image").show();		
 				$(this).replaceWith($(this).val("").clone(true));
+				$(".picture-inner").css("display","none");
 			}
 			else {
 				var reader = new FileReader();

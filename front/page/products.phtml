@@ -1,10 +1,25 @@
-<a href="/admin?logout=1"><button>Log Out</button></a>
-<a href="add">Add</a>
-<a href="products">Products</a>
+<a href="/admin?logout=1"><button>Log Out</button></a> &nbsp;
+<a href="add">Add Items</a> &nbsp;
+<a href="products">View/Edit Products</a> &nbsp;
 <a href="admin">Home</a>
+<select name="category">
+	<option value="all">All</option>
+	<option value="dress">Dress</option>
+	<option value="gadgets">Gadgets</option>
+	<option value="jackets">Jackets</option>
+	<option value="jumpshorts">Jumpshorts</option>
+	<option value="onhand">Onhand Items</option>
+	<option value="pullovers">Pullovers</option>
+	<option value="shirts">Shirts</option>
+	<option value="skirts">Skirts</option>
+	<option value="soap">Soap</option>
+	<option value="tops">Tops</option>
+	<option value="bags">Bags</option>
+	<option value="pants">Pants</option>
+</select>
 <div class="cat-album">
 	<?php foreach ($items as $key => $item): ?>
-		<div class="pic-album">
+		<div class="pic-album <?php echo $item['category'] ?>">
 			<div class="picture" id="<?php echo $item['product_id'] ?>">
 				<img src="<?php echo $item['product_image'] ?>" class="picture-inner original"/></br>
 				<div class="description"><?php echo $item['product_description']; ?></div>
@@ -97,6 +112,13 @@
 	            };
 	            reader.readAsDataURL($(this)[0].files[0]);
 	        }
+		});
+		$("select").on("change", function(){
+			$(".pic-album").hide();
+			$("."+$(this).val()).show();
+			if ($(this).val() == "all") {
+				$(".pic-album").show();
+			}
 		});
 	});
 	function number_format(number, decimals, dec_point, thousands_sep) {
