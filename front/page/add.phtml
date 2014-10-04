@@ -1,10 +1,27 @@
 <a href="/admin?logout=1"><button>Log Out</button></a>
+<a href="add">Add</a>
+<a href="products">Products</a>
+<a href="admin">Home</a>
+<div class="success">Successfully added item!</div>
 <form method="POST" enctype="multipart/form-data">
+	<img class="picture-inner" style="display: none;"/></br>
 	<input type="file" name="file"/>
+	<div class="image error">
+		Please choose an image to be uploaded
+	</div><br/>
 	Item Description<br/>
 	<input type="text" name="description"/><br/>
+	<div class="description error">
+		Please specify an item description
+	</div><br/>
 	Item Price<br/>
 	<input type="text" name="price"/><br/>
+	<div class="price error">
+		Please specify an item price
+	</div><br/>
+	<div class="invalid-price error">
+		Please specify a valid positive item price without commas
+	</div><br/>
 	Item Category<br/>
 	<select name="category">
 		<option value="dress">Dress</option>
@@ -25,30 +42,69 @@
 <script type="text/javascript">
 	jQuery(function($) {
 		$(".submit").on("click", function(e) {
+			e.preventDefault();
+			$(".error").hide();
 			if ($("input[type='file']")[0].files.length == 0) {
-				alert("Please choose an image to be uploaded");
-				e.preventDefault();
+				$(".image").show();		
+				if ($("input[name='description']").val().trim() == "") {
+					$(".description").show();		
+				}
+				if ($("input[name='price']").val().trim() == "") {
+					$(".price").show();		
+				}
+				else if ($("input[name='price']").val().trim().search(/[^.0-9]/) != -1 || isNaN($("input[name='price']").val().trim())) {
+					$(".invalid-price").show();		
+				}
+				return;
 			}
-			else if ($("input[name='description']").val().trim() == "") {
-				alert("Please specify an item description");
-				e.preventDefault();
+			if ($("input[name='description']").val().trim() == "") {
+				$(".description").show();		
+				if ($("input[name='price']").val().trim() == "") {
+					$(".price").show();		
+				}
+				else if ($("input[name='price']").val().trim().search(/[^.0-9]/) != -1 || isNaN($("input[name='price']").val().trim())) {
+					$(".invalid-price").show();		
+				}
+				return;
 			}
-			else if ($("input[name='price']").val().trim() == "") {
-				alert("Please specify an item price");
-				e.preventDefault();
+			if ($("input[name='price']").val().trim() == "") {
+				$(".price").show();		
+				return;
 			}
 			else if ($("input[name='price']").val().trim().search(/[^.0-9]/) != -1 || isNaN($("input[name='price']").val().trim())) {
-				alert("Please specify a valid positive item price without commas");
-				e.preventDefault();
+				$(".invalid-price").show();		
+				return;
 			}
-			else {
-				alert("Successfully added item!");
-			}
+
+			var fd = new FormData();
+			fd.append("image",$(this).parent().children("input[type='file']")[0].files[0]);
+			fd.append("description",$(this).parent().children("input[name='description']").val());
+			fd.append("price",$(this).parent().children("input[name='price']").val());
+			fd.append("category",$(this).parent().children("select").val());
+			$(".success").css("display","block");
+			$(this).parent().trigger("reset");
+			$(this).replaceWith($(this).val("").clone(true));
+			$(".picture-inner").css("display","none");
+			$.ajax({
+				type: "POST",
+				url: "add",
+				data: fd,
+	            processData: false,
+	            contentType: false
+			});
 		});
 		$("input[type='file']").on("change", function() {
 			if ($(this)[0].files[0].type.search(/jpeg|png|gif/) == -1) {
 				alert("Chosen file is not an image!");
 				$(this).replaceWith($(this).val("").clone(true));
+			}
+			else {
+				var reader = new FileReader();
+	            var file = $(this); 
+	            reader.onload = function (e) {
+	                file.parent().children("img").attr("src", e.target.result).css("display","inline");
+	            };
+	            reader.readAsDataURL($(this)[0].files[0]);
 			}
 		});
 	});

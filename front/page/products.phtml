@@ -1,4 +1,7 @@
 <a href="/admin?logout=1"><button>Log Out</button></a>
+<a href="add">Add</a>
+<a href="products">Products</a>
+<a href="admin">Home</a>
 <div class="cat-album">
 	<?php foreach ($items as $key => $item): ?>
 		<div class="pic-album">
@@ -54,7 +57,7 @@
 	            })
 				$(this).parent().prev().children(".description").html($(this).parent().children("[name=description]").val());
 				$(this).parent().prev().children(".price").html("Php "+ price);
-                $(this).parent().prev().children(".original").attr("src", $(".upload").attr("src"));
+                $(this).parent().prev().children(".original").attr("src", $(this).parent().children(".upload").attr("src"));
 				$(this).parent().hide();
 				$(this).parent().prev().show();
 			}
@@ -86,7 +89,7 @@
 				alert("Chosen file is not an image!");
 				$(this).replaceWith($(this).val("").clone(true));
 			}
-			if ($(this)[0].files && $(this)[0].files[0]) {
+			else {
 	            var reader = new FileReader();
 	            var file = $(this); 
 	            reader.onload = function (e) {

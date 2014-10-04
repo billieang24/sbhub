@@ -35,8 +35,8 @@ class Front_Page_Index extends Front_Page {
 			if (isset($_FILES['image'])) {
 				$item = front()->products()->getDetail($_POST['id']);
 				unlink(dirname(__FILE__).'/../../web'.$item['product_image']);
-				front()->products()->update($_POST['id'],$_POST['description'], $_POST['price'], '/images/'.$_FILES['image']['name']);
-				if (move_uploaded_file($_FILES['image']['tmp_name'], dirname(__FILE__).'/../../web/images/'.$_FILES['image']['name'])) {
+				front()->products()->update($_POST['id'],$_POST['description'], $_POST['price'], '/images/'.$_FILES['image']['name']."-".str_replace('/tmp/',"",($_FILES['image']['tmp_name'])));
+				if (move_uploaded_file($_FILES['image']['tmp_name'], dirname(__FILE__).'/../../web/images/'.$_FILES['image']['name']."-".str_replace('/tmp/',"",($_FILES['image']['tmp_name'])))) {
 					return 'true';
 				}
 			}

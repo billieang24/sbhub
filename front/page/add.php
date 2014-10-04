@@ -27,9 +27,9 @@ class Front_Page_Index extends Front_Page {
 		if (!isset($_SESSION['admin'])){
 			header('Location:/login');
 		}
-		if (isset($_FILES['file'])){
-			move_uploaded_file($_FILES['file']['tmp_name'], dirname(__FILE__).'/../../web/images/'.$_FILES['file']['name']);
-			front()->products()->create($_POST['description'],$_POST['price'],'/images/'.$_FILES['file']['name'],$_POST['category']);
+		if (isset($_FILES['image'])){
+			move_uploaded_file($_FILES['image']['tmp_name'], dirname(__FILE__).'/../../web/images/'.$_FILES['image']['name']."-".str_replace('/tmp/',"",($_FILES['image']['tmp_name'])));
+			front()->products()->create($_POST['description'],$_POST['price'],'/images/'.$_FILES['image']['name']."-".str_replace('/tmp/',"",($_FILES['image']['tmp_name'])),$_POST['category']);
 		}
 		return $this->_page();
 	}

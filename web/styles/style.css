@@ -140,3 +140,11 @@ h1{
 .categories a{
 	font-size: 12px;
 }
+.success{
+	display: none;
+	background-color: #3e8f3e;
+}
+.error{
+	display: none;
+	background-color: red;
+}
