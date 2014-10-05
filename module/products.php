@@ -7,12 +7,13 @@ class Products extends Eden_Class {
 		$this->_database = $database;
 	}
 	
-	public function create($description, $price, $image, $category) {
+	public function create($description, $price, $image, $category, $stocks) {
 		$this->_database
 			->model()
 			->setProductDescription($description)
 			->setProductImage($image)
 			->setPrice($price)
+			->setStocks($stocks)
 			->setCategory($category)
 			->save('products');
 		
@@ -37,13 +38,14 @@ class Products extends Eden_Class {
 		return $this->_database->getRow('products', 'product_id', $id);
 	}
 	
-	public function update($id, $description, $price, $image = null) {
+	public function update($id, $description, $price, $stocks, $image = null) {
 		if ($image == null) {
 			$this->_database
 				->model()
 				->setProductId($id)
 				->setProductDescription($description)
 				->setPrice($price)
+				->setStocks($stocks)
 				->save('products');
 		}
 		else {
@@ -51,6 +53,7 @@ class Products extends Eden_Class {
 				->model()
 				->setProductId($id)
 				->setProductDescription($description)
+				->setStock($stocks)
 				->setPrice($price)
 				->setProductImage($image)
 				->save('products');

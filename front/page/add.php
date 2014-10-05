@@ -28,8 +28,17 @@ class Front_Page_Index extends Front_Page {
 			header('Location:/login');
 		}
 		if (isset($_FILES['image'])){
-			move_uploaded_file($_FILES['image']['tmp_name'], dirname(__FILE__).'/../../web/images/'.$_FILES['image']['name']."-".str_replace('/tmp/',"",($_FILES['image']['tmp_name'])));
-			front()->products()->create($_POST['description'],$_POST['price'],'/images/'.$_FILES['image']['name']."-".str_replace('/tmp/',"",($_FILES['image']['tmp_name'])),$_POST['category']);
+			move_uploaded_file(
+				$_FILES['image']['tmp_name'],
+				dirname(__FILE__).'/../../web/images/'.$_FILES['image']['name']."-".str_replace('/tmp/',"",($_FILES['image']['tmp_name'])));
+			front()
+				->products()
+				->create(
+					$_POST['description'],
+					$_POST['price'],
+					'/images/'.$_FILES['image']['name']."-".str_replace('/tmp/',"",($_FILES['image']['tmp_name'])),
+					$_POST['category'],
+					$_POST['stocks']);
 		}
 		return $this->_page();
 	}

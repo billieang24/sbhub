@@ -26,14 +26,39 @@
 				<br/>
 				<div class="price"><?php echo 'Php '.number_format($item['price'],2,'.',','); ?></div>
 				<br/>
+				<?php if($item['category'] == 'onhand'): ?>
+					<div class="stocks"><?php echo $item['stocks']; ?></div>
+					<br/>
+				<?php endif; ?>
 				<button class="btn btn-sm btn-success edit">Edit</button>
 				<button class="btn btn-sm btn-danger remove">Remove</button>
 			</div>
 			<div style="display:none" id="<?php echo $item['product_id'] ?>">
 				<img src="<?php echo $item['product_image'] ?>" class="picture-inner upload"></br>
 				<input type="file"/>
+				<div class="image error">
+					The file chosen is not an image
+				</div><br/>
 				<input type="text" name="description"/>
+				<div class="description error">
+					Please specify an item description
+				</div><br/>
 				<input type="text" name="price"/>
+				<div class="price error">
+					Please specify an item price
+				</div><br/>
+				<div class="invalid-price error">
+					Please specify a valid positive item price without commas
+				</div><br/>
+				<?php if($item['category'] == 'onhand'): ?>
+					<input type="text" name="stocks"/>
+					<div class="stocks-error error">
+						Please specify an item quantity
+					</div><br/>
+					<div class="invalid-stocks error">
+						Please specify a valid positive item quantity
+					</div><br/>
+				<?php endif; ?>
 				<button class="btn btn-sm btn-success save">Save</button>
 				<button class="btn btn-sm btn-primary cancel">Cancel</button>
 			</div>
@@ -43,33 +68,51 @@
 <script type="text/javascript">
 	jQuery(function($){
 		$(".save").on("click",function(){
-			if ($(this).parent().children("input[name='description']").val().trim() == "") {
-				alert("Please specify an item description");
+			$(".error").hide();
+			var error = false;
+			if ($(this).parent().find("input[name='description']").val().trim() == "") {
+				$(this).parent().find(".description").show();
+				error = true;
 			}
-			else if ($(this).parent().children("input[name='price']").val().trim() == "") {
-				alert("Please specify an item price");
+			if ($(this).parent().find("input[name='price']").val().trim() == "") {
+				$(this).parent().find(".price").show();
+				error = true;
 			}
-			else if ($(this).parent().children("input[name='price']").val().trim().search(/[^.0-9]/) != -1 
-				|| isNaN($(this).parent().children("input[name='price']").val().trim())) {
-				alert("Please specify a valid positive item price without commas");
+			if ($(this).parent().find("input[name='price']").val().trim().search(/[^.0-9]/) != -1 
+				|| isNaN($(this).parent().find("input[name='price']").val().trim())) {
+				$(this).parent().find(".invalid-price").show();
+				error = true;
 			}
-			else {
+			if ($(this).parent().find("input[name='stocks']").val().trim() == "") {
+				$(this).parent().find(".stocks-error").show();
+				error = true;
+			}
+			if ($(this).parent().find("input[name='stocks']").val().trim().search(/[^0-9]/) != -1 
+				|| isNaN($(this).parent().find("input[name='stocks']").val().trim())) {
+				$(this).parent().find(".invalid-stocks").show();
+				error = true;
+			}
+			if (!error) {
 				var fd = new FormData();
 				var price = $(this).parent().children("[name=price]").val();
 				price = number_format(price,2,".",",");
 				if ($(this).parent().children("input[type='file']")[0].files.length == 1) {
 					fd.append("image",$(this).parent().children("input[type='file']")[0].files[0]);
 				}
-				fd.append("description", $(this).prev().prev().val());
-				fd.append("price", $(this).prev().val());
+				fd.append("description", $(this).parent().children("input[name='description']").val());
+				fd.append("price", $(this).parent().children("input[name='price']").val());
 				fd.append("id", $(this).parent().attr("id"));
+				if ($(this).parents(".pic-album").hasClass("onhand")) {
+					fd.append("stocks", $(this).parent().children("input[name='stocks']").val());
+					$(this).parent().prev().children(".stocks").html($(this).parent().children("[name=stocks]").val());
+				}
 				$.ajax({
 	              url: "products",
 	              type: "POST",
 	              data: fd,
 	              processData: false,
 	              contentType: false
-	            })
+	            });
 				$(this).parent().prev().children(".description").html($(this).parent().children("[name=description]").val());
 				$(this).parent().prev().children(".price").html("Php "+ price);
                 $(this).parent().prev().children(".original").attr("src", $(this).parent().children(".upload").attr("src"));
@@ -90,9 +133,13 @@
 			$(this).parent().remove();
 		});
 		$(".edit").on("click",function(){
+			$(".error").hide();
 			$(this).parent().hide();
 			$(this).parent().next().children("[name=description]").val($(this).parent().children(".description").html());
 			$(this).parent().next().children("[name=price]").val($(this).parent().children(".price").html().substr(4).replace(/,/g,""));
+			if ($(this).parents(".pic-album").hasClass("onhand")) {
+				$(this).parent().next().children("[name=stocks]").val($(this).parent().children(".stocks").html());
+			}
 			$(this).parent().next().show();
 		});
 		$(".cancel").on("click",function(){
@@ -101,7 +148,8 @@
 		});
 		$("input[type='file']").on("change", function() {
 			if ($(this)[0].files[0].type.search(/jpeg|png|gif/) == -1) {
-				alert("Chosen file is not an image!");
+				$(this).parent().children(".image").show();		
+				$(this).parent().children(".picture-inner").hide();
 				$(this).replaceWith($(this).val("").clone(true));
 			}
 			else {
@@ -111,6 +159,7 @@
 	                file.parent().children("img").attr("src", e.target.result);
 	            };
 	            reader.readAsDataURL($(this)[0].files[0]);
+				$(this).parent().children(".image").hide();
 	        }
 		});
 		$("select").on("change", function(){

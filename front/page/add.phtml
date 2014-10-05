@@ -10,7 +10,7 @@
 		Please choose an image to be uploaded
 	</div><br/>
 	<div class="invalid-image error">
-		Please choose an image to be uploaded
+		The file chosen is not an image
 	</div><br/>
 	Item Description<br/>
 	<input type="text" name="description"/><br/>
@@ -25,6 +25,16 @@
 	<div class="invalid-price error">
 		Please specify a valid positive item price without commas
 	</div><br/>
+	<div class="stocks" style="display:none">
+		Item Quantity<br/>
+		<input type="text" name="stocks"/><br/>
+		<div class="stocks-error error">
+			Please specify an item quantity
+		</div><br/>
+		<div class="invalid-stocks error">
+			Please specify a valid positive item quantity
+		</div><br/>
+	</div>
 	Item Category<br/>
 	<select name="category">
 		<option value="dress">Dress</option>
@@ -46,69 +56,78 @@
 	jQuery(function($) {
 		$(".submit").on("click", function(e) {
 			e.preventDefault();
+			var error = false;
 			$(".error").hide();
 			if ($("input[type='file']")[0].files.length == 0) {
-				$(".image").show();		
-				if ($("input[name='description']").val().trim() == "") {
-					$(".description").show();		
-				}
-				if ($("input[name='price']").val().trim() == "") {
-					$(".price").show();		
-				}
-				else if ($("input[name='price']").val().trim().search(/[^.0-9]/) != -1 || isNaN($("input[name='price']").val().trim())) {
-					$(".invalid-price").show();		
-				}
-				return;
+				$(".image").show();
+				error = true;
 			}
 			if ($("input[name='description']").val().trim() == "") {
-				$(".description").show();		
-				if ($("input[name='price']").val().trim() == "") {
-					$(".price").show();		
-				}
-				else if ($("input[name='price']").val().trim().search(/[^.0-9]/) != -1 || isNaN($("input[name='price']").val().trim())) {
-					$(".invalid-price").show();		
-				}
-				return;
+				$(".description").show();
+				error = true;
 			}
 			if ($("input[name='price']").val().trim() == "") {
 				$(".price").show();		
-				return;
+				error = true;
 			}
 			else if ($("input[name='price']").val().trim().search(/[^.0-9]/) != -1 || isNaN($("input[name='price']").val().trim())) {
 				$(".invalid-price").show();		
-				return;
+				error = true;
 			}
-
-			var fd = new FormData();
-			fd.append("image",$(this).parent().children("input[type='file']")[0].files[0]);
-			fd.append("description",$(this).parent().children("input[name='description']").val());
-			fd.append("price",$(this).parent().children("input[name='price']").val());
-			fd.append("category",$(this).parent().children("select").val());
-			$(".success").css("display","block");
-			$(this).parent().trigger("reset");
-			$(this).replaceWith($(this).val("").clone(true));
-			$(".picture-inner").css("display","none");
-			$.ajax({
-				type: "POST",
-				url: "add",
-				data: fd,
-	            processData: false,
-	            contentType: false
-			});
+			if ($("input[name='stocks']").val().trim() == "") {
+				if ($("select").val() == "onhand"){
+					$(".stocks-error").show();		
+					error = true;
+				}
+			}
+			else if ($("input[name='stocks']").val().trim().search(/[^0-9]/) != -1 || isNaN($("input[name='stocks']").val().trim())) {
+				if ($("select").val() == "onhand"){
+					$(".invalid-stocks").show();		
+					error = true;
+				}
+			}
+			if (!error) {
+				var fd = new FormData();
+				fd.append("image",$(this).parent().find("input[type='file']")[0].files[0]);
+				fd.append("description",$(this).parent().find("input[name='description']").val());
+				fd.append("price",$(this).parent().find("input[name='price']").val());
+				fd.append("stocks",$(this).parent().find("input[name='stocks']").val());
+				fd.append("category",$(this).parent().find("select").val());
+				$(".success").show();
+				$(".picture-inner").hide();
+				$(".stocks").hide();
+				$(this).parent().trigger("reset");
+				$(this).replaceWith($(this).val("").clone(true));
+				$.ajax({
+					type: "POST",
+					url: "add",
+					data: fd,
+		            processData: false,
+		            contentType: false
+				});
+			}
 		});
 		$("input[type='file']").on("change", function() {
 			if ($(this)[0].files[0].type.search(/jpeg|png|gif/) == -1) {
 				$(".invalid-image").show();		
 				$(this).replaceWith($(this).val("").clone(true));
-				$(".picture-inner").css("display","none");
+				$(".picture-inner").hide();
 			}
 			else {
 				var reader = new FileReader();
-	            var file = $(this); 
 	            reader.onload = function (e) {
-	                file.parent().children("img").attr("src", e.target.result).css("display","inline");
+	                $(".picture-inner").attr("src", e.target.result).css("display","inline");
 	            };
 	            reader.readAsDataURL($(this)[0].files[0]);
+				$(".invalid-image").hide();		
+			}
+		});
+		$("select").on("change", function(){
+			$(".stocks").hide();
+			$(".stocks input[name='stocks']").val("");
+			$(".error").hide();
+			if ($("select").val() == "onhand"){
+				$(".stocks").show();
 			}
 		});
 	});
