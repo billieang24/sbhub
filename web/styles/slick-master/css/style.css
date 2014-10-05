@@ -29,6 +29,7 @@
 .fixed-header ul.nav{float:right;margin:0;padding:5px;}
 .fixed-header ul.nav li{margin:0 0 0 10px;}
 .header{padding:20px 0;}
+.item-categories ul.nav li a{font-size:13px;text-decoration:none;}
 .margin-40{margin-bottom:40px;}
 .more,.button.first{margin-top:40px;}
 .red{background:#e74c3c;color:#fff;}
@@ -68,7 +69,7 @@ thead{background:#fff;border-color:#3498db;color:#3498db;}
 tr{background:#fff;border-right:1px solid #fff;}
 ul.nav{margin-bottom:0;padding-left:0;text-align:center;}
 ul.nav li{display:inline-block;list-style-type:none;margin:0 20px;}
-ul.nav li a{font-size:12px;text-decoration:none;}
+ul.nav li a{font-size:17px;text-decoration:none;}
 @media (max-width: 420px) {
 ul.nav li a{display:block;font-size:10px;}
 }

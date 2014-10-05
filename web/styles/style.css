@@ -5,11 +5,7 @@ body{
 }
 .container{
 	background-color: white;
-	margin: 5% 10%;
 	box-shadow: 0px 10px 10px BLACK;
-	min-height: 100%;
-	padding: 0px 30px;
-	max-width: 75%;
 }
 .banner{
 	padding: 20px 20px;
@@ -32,8 +28,6 @@ h1{
 }
 #menu {
     width: 100%;
-    height: 50px;
-    font-size: 20px;
     font-family: Pacifico;
     font-weight: bold;
     text-align: center;
@@ -41,18 +35,7 @@ h1{
     border-bottom: 5px double;
  	margin: 10px 0px;
 }
-#menu ul {
-    height: auto;
-    padding: 10px 0px;
-    margin: 0px;
-}
-#menu li { 
-	display: inline; 
-	padding: 20px; 
-}
-#menu li a{
-	color :#dd0000;
-}
+
 .carousel{
 	padding: 10px;
 	background-color: gray;
@@ -72,10 +55,12 @@ h1{
 .categories{
 	text-align: center;
 	max-width: 40%;
-	float:left;
 	margin: 0px 20px 20px 0px;
-	font-size: 20px;
+	font-size: 24px;
 }
+.item-categories{
+	max-width: 25%;	
+} 
 .footer{
 	background-color: black;
 	color : white;
@@ -138,7 +123,7 @@ h1{
 	padding-bottom: 10px;
 }
 .categories a{
-	font-size: 12px;
+	font-size: 14px;
 }
 .success{
 	display: none;

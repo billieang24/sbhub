@@ -1,16 +1,18 @@
-<div class="categories">
+<div class="  item-categories pull-left">
 	<h4 class="title">Categories</h4>
-	<a href="/categories/onhand">Onhand Items</a>
-	<a href="/categories/soap">Soaps</a>
-	<a href="/categories/gadgets">Gadgets</a>
-	<a href="/categories/bags">Bags</a>
-	<a href="/categories/dress">Dresses</a>
-	<a href="/categories/skirts">Shorts/Skirts/Denim</a>
-	<a href="/categories/pants">Pants/Jeggings/Harem Pants</a>
-	<a href="/categories/tops">Tops/Loose Tops</a>
-	<a href="/categories/pullovers">Pullovers/Longsleeves</a>
-	<a href="/categories/jackets">Jackets/Cardigans/Blazers</a>
-	<a href="/categories/jumpshorts">Jumpshorts/Jumpsuits</a></br>
+	<ul class="nav nav-pills nav-stacked">
+		 <li><a href="/categories/onhand">Onhand Items</a></li>
+		 <li><a href="/categories/soap">Soaps</a></li>
+		 <li><a href="/categories/gadgets">Gadgets</a></li>
+		 <li><a href="/categories/bags">Bags</a></li>
+		 <li><a href="/categories/dress">Dresses</a></li>
+		 <li><a href="/categories/skirts">Shorts&Skirts</a></li>
+		 <li><a href="/categories/pants">Pants</a></li>
+		 <li><a href="/categories/tops">Tops/Loose Tops</a></li>
+		 <li><a href="/categories/pullovers">Longsleeves</a></li>
+		 <li><a href="/categories/jackets">Cardigans</a></li>
+		 <li><a href="/categories/jumpshorts">Jumpsuits</a></br></li>
+	</ul>
 </div>
 <div class="cat-album">
 	<h2 class="title"><?php echo ucfirst($category).'<br/>'; ?></h2>
@@ -21,7 +23,9 @@
 		<div class="picture" id="<?php echo $item['product_id'] ?>">
 		<img src="<?php echo $item['product_image'] ?>" class="picture-inner"></br>
 		<?php echo $item['product_name'].'<br/>'.'Php '.$item['price'].'<br/>'; ?>
-		<button class="btn btn-sm btn-danger">Add to Cart</button>
+		<button class="btn btn-sm btn-danger">
+			<span class="glyphicon glyphicon-heart-empty"></span> Add to Cart
+		</button>
 		</div>
 	</div>
 	<?php
