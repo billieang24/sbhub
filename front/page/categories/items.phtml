@@ -13,6 +13,11 @@
 		 <li><a href="/categories/jackets">Cardigans</a></li>
 		 <li><a href="/categories/jumpshorts">Jumpsuits</a></br></li>
 	</ul>
+	<center>
+		<a href="/cart"><button class="btn btn-lg btn-warning" >
+		<span class="glyphicon glyphicon-eye-open"></span>
+			View Cart</button></a>
+	</center>
 </div>
 <div class="cat-album">
 	<h2 class="title"><?php echo ucfirst($category).'<br/>'; ?></h2>
@@ -31,9 +36,6 @@
 	<?php
 	endforeach;
 	?>
-</div>
-<div class="pull-right">
-	<a href="/cart"><button class="btn btn-lg btn-warning">View Cart</button></a>
 </div>
 <script type="text/javascript">
 	jQuery(function($){

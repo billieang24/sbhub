@@ -1,32 +1,80 @@
-<div class="jumbotron">
-	<div class="style">
-		<h1>Check it out!</h1>
-		<p>Grab your very own printed jumpsuits for a fabulous outfit for every occasion!</p>
-		<center>
-		<img src="\images\pants.jpeg" class="jumbotron-img">	
-			<a href="\categories\pants">
-			<button class="btn btn-lg btn-danger">
-				<span class="glyphicon glyphicon-shopping-cart"></span>Shop Now!
-			</button>
-			</a>
-		</center>
-	</div>
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+	  <ol class="carousel-indicators">
+	    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+	    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+	    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+	  </ol>
+
+	  <!-- Wrapper for slides -->
+	  <center>
+	  	<div class="carousel-inner">
+	  	  <div class="item active">
+	    	  <img src="images/fb.jpg" alt="...">
+		      <div class="carousel-caption">
+		      </div>
+	    </div>
+	    <div class="item">
+	    	  <img src="images/fb.jpg" alt="...">
+		      <div class="carousel-caption">
+		        ...
+		      </div>
+	    </div>
+	    <div class="item">
+	    	  <img src="images/fb.jpg" alt="...">
+		      <div class="carousel-caption">
+		        ...
+		      </div>
+	    </div>
+	  </div>
+	   	</center>
+
+	  <!-- Controls -->
+	  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+	    <span class="glyphicon glyphicon-chevron-left"></span>
+	  </a>
+	  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+	    <span class="glyphicon glyphicon-chevron-right"></span>
+	  </a>
+</div>
+<div class="banner">
+    <p>
+    	<a href="/categories/onhand" class="btn btn-lg btn-primary" role="button">
+    	<span class="glyphicon glyphicon-shopping-cart"></span>
+    	Shop Now!
+   		</a>
+   	</p>
 </div>
 <div class="mid">
-	<hr class="line hr">
-	<div class="categories">
-		<h2 class="title">Categories</h2>
-			<a href="/categories/onhand">Onhand Items</a>
-			<a href="/categories/soap">Soaps</a>
-			<a href="/categories/gadgets">Gadgets</a>
-			<a href="/categories/bags">Bags</a>
-			<a href="/categories/dress">Dresses</a>
-			<a href="/categories/skirts">Shorts/Skirts/Denim</a>
-			<a href="/categories/pants">Pants/Jeggings/Harem Pants</a>
-			<a href="/categories/tops">Tops/Loose Tops</a>
-			<a href="/categories/pullovers">Pullovers/Longsleeves</a>
-			<a href="/categories/jackets">Jackets/Cardigans/Blazers</a>
-			<a href="/categories/jumpshorts">Jumpshorts/Jumpsuits</a></br>
-	</div>
-	<div class="bogus buyers"></div>
+	<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+         Bogus Buyers
+        </a>
+      </h2>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in">
+      <div class="panel-body">
+        <!-- thumbnail -->
+        <div class="row">
+		  <div class="col-sm-2 col-md-2">
+		    <div class="thumbnail">
+				<img src="\images\bpi.jpg">	
+		      <div class="caption">
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<!-- endthumbnails -->
+      </div>
+    <p>
+    	<a href="\bogus" class="btn btn-primary" role="button">
+    		<span class="glyphicon glyphicon-expand"></span>Show More
+    	</a>
+    </p>
+    </div>
+  </div>  
+</div>
 </div>

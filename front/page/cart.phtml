@@ -1,9 +1,13 @@
 <div class="album">
 	<div class="page-header">
-		<center>
-			<h3>Shopping Cart</h3>
-			<strong>Selected items</strong>
-		</center>
+		<h2>Shopping Cart</h2>
+		<h5>Selected items</h5>
+		<a href="/order" class="btn btn-lg btn-success" role="button">
+			<span class="glyphicon glyphicon-ok-circle"></span>Checkout
+		</a>
+		<a href="/categories/pants" class="btn btn-lg btn-warning pull-right" role="button">
+			<span class="glyphicon glyphicon-plus"></span>Shop More!
+		</a>
 	</div>
 	<div class="album-inner">
 		<?php foreach ($items as $key => $item): ?>
@@ -15,8 +19,6 @@
 		<?php endforeach ?>
 	</div>
 </div>
-<a href="/order"><button class="btn btn-success">Checkout</button></a>
-<a href="/categories/pants"><button class="btn btn-warning">Shop More!</button></a>
 <script type="text/javascript">
 	jQuery(function($){
 		$(".btn").on("click", function(){

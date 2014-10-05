@@ -15,7 +15,7 @@ class Front_Page_Index extends Front_Page {
 	-------------------------------*/
 	protected $_title = 'Style and Beauty Hub';
 	protected $_class = 'index';
-	protected $_template = '/customer.phtml';
+	protected $_template = '/bogus.phtml';
 	
 	/* Private Properties
 	-------------------------------*/
@@ -24,10 +24,6 @@ class Front_Page_Index extends Front_Page {
 	/* Public Methods
 	-------------------------------*/
 	public function render() {
-		// $transactions = front()->transactions()->getList();
-		// $this->_body = array(
-		// 		'transactions' => $transactions
-		// 	);
 		return $this->_page();
 	}
 	
