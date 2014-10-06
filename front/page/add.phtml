@@ -1,57 +1,87 @@
-<a href="/admin?logout=1"><button>Log Out</button></a> &nbsp;
-<a href="add">Add Items</a> &nbsp;
-<a href="products">View/Edit Products</a> &nbsp;
-<a href="admin">Home</a>
-<div class="success">Successfully added item!</div>
-<form method="POST" enctype="multipart/form-data">
-	<img class="picture-inner" style="display: none;"/></br>
-	<input type="file" name="file"/>
-	<div class="image error">
-		Please choose an image to be uploaded
-	</div><br/>
-	<div class="invalid-image error">
-		The file chosen is not an image
-	</div><br/>
-	Item Description<br/>
-	<input type="text" name="description"/><br/>
-	<div class="description error">
-		Please specify an item description
-	</div><br/>
-	Item Price<br/>
-	<input type="text" name="price"/><br/>
-	<div class="price error">
-		Please specify an item price
-	</div><br/>
-	<div class="invalid-price error">
-		Please specify a valid positive item price without commas
-	</div><br/>
-	<div class="stocks" style="display:none">
-		Item Quantity<br/>
-		<input type="text" name="stocks"/><br/>
-		<div class="stocks-error error">
-			Please specify an item quantity
-		</div><br/>
-		<div class="invalid-stocks error">
-			Please specify a valid positive item quantity
-		</div><br/>
+<div class="container2">
+	<div class="row">
+		<div class="col-xs-12 col-md-8">
+			<h4 class="pull-left"> Hi Admin!</h4>
+			<a href="/admin?logout=1" role="button" class="btn btn-info btn-sm pull-right"><span class="glyphicon glyphicon-off"></span> Log Out</a> 
+		</div>
 	</div>
-	Item Category<br/>
-	<select name="category">
-		<option value="dress">Dress</option>
-		<option value="gadgets">Gadgets</option>
-		<option value="jackets">Jackets</option>
-		<option value="jumpshorts">Jumpshorts</option>
-		<option value="onhand">Onhand Items</option>
-		<option value="pullovers">Pullovers</option>
-		<option value="shirts">Shirts</option>
-		<option value="skirts">Skirts</option>
-		<option value="soap">Soap</option>
-		<option value="tops">Tops</option>
-		<option value="bags">Bags</option>
-		<option value="pants">Pants</option>
-	</select>
-	<button class="btn-success btn submit" type="submit">Submit</button>
-</form>
+	<div class="row">
+		<div class="col-sm-3 border-right item-categories">
+			<ul class="nav nav-tabs nav-stacked">
+				<li><a href="admin">Home</a></li>
+			  	<li class="active"><a href="add">Add Items</a></li>
+				<li><a href="products">View/Edit Products</a></li>
+				<li><a href="feedbacks">Feedbacks</a></li>
+				<li><a href="bogusbuyers">Bogus Buyers</a></li>
+			</ul>
+		</div>
+		<div class="col-sm-7">
+			<div class="success alert alert-success alert-dismissible" role="alert">
+			  <button type="button" class="close" data-dismiss="alert">
+			  	<span aria-hidden="true">&times;</span>
+			  	<span class="sr-only">Close</span></button>
+			  <strong>Success!</strong> You've successfully addedd an item!
+			</div>
+				<form method="POST" enctype="multipart/form-data">
+					<h5>Add Product</h5></br>
+					<div class="image error alert alert-danger alert-dismissible" role="alert">
+					  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					  <strong>Warning!</strong> Please choose a file to upload!
+					</div>
+					<div class="invalid-image error alert alert-danger alert-dismissible" role="alert">
+					  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					  <strong>Warning!</strong>The file chosen is not an image
+					</div>
+					<img class="picture-inner" style="display: none;"/></br>
+					<input type="file" name="file" class="btn-file"/></br>
+					<div class="description error alert alert-danger alert-dismissible" role="alert">
+					  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					  <strong>Warning!</strong>Please specify an item description!
+					</div>
+					Item Description<br/>
+					<input type="text" name="description" class="form-control"/></br>
+					<div class="price error alert alert-danger alert-dismissible" role="alert">
+					  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					  <strong>Warning!</strong>Please specify an item price!
+					</div>
+					<div class="invalid-price error alert alert-danger alert-dismissible" role="alert">
+					  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					  <strong>Warning!</strong>Please specify a valid positive item price without commas!
+					</div>
+					Item Price<br/>
+					<input type="text" name="price" class="form-control"/><br/>
+					<div class="stocks" style="display:none">
+						Item Quantity<br/>
+						<input type="text" name="stocks"/><br/>
+						<div class="stocks-error error">
+							Please specify an item quantity
+						</div><br/>
+						<div class="invalid-stocks error">
+							Please specify a valid positive item quantity
+						</div><br/>
+					</div>
+				Item Category<br/>
+				<select name="category" class="form-control">
+					<option value="dress">Dress</option>
+					<option value="gadgets">Gadgets</option>
+					<option value="jackets">Jackets</option>
+					<option value="jumpshorts">Jumpshorts</option>
+					<option value="onhand">Onhand Items</option>
+					<option value="pullovers">Pullovers</option>
+					<option value="shirts">Shirts</option>
+					<option value="skirts">Skirts</option>
+					<option value="soap">Soap</option>
+					<option value="tops">Tops</option>
+					<option value="bags">Bags</option>
+					<option value="pants">Pants</option>
+				</select></br>
+				<button class="btn-success btn submit" type="submit">
+					<span class="glyphicon glyphicon-send"></span> Submit
+				</button>
+			</form>
+		</div>
+	</div>
+</div>
 <script type="text/javascript">
 	jQuery(function($) {
 		$(".submit").on("click", function(e) {

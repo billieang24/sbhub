@@ -1,70 +1,86 @@
-<a href="/admin?logout=1"><button>Log Out</button></a> &nbsp;
-<a href="add">Add Items</a> &nbsp;
-<a href="products">View/Edit Products</a> &nbsp;
-<a href="admin">Home</a>
-<select name="category">
-	<option value="all">All</option>
-	<option value="dress">Dress</option>
-	<option value="gadgets">Gadgets</option>
-	<option value="jackets">Jackets</option>
-	<option value="jumpshorts">Jumpshorts</option>
-	<option value="onhand">Onhand Items</option>
-	<option value="pullovers">Pullovers</option>
-	<option value="shirts">Shirts</option>
-	<option value="skirts">Skirts</option>
-	<option value="soap">Soap</option>
-	<option value="tops">Tops</option>
-	<option value="bags">Bags</option>
-	<option value="pants">Pants</option>
-</select>
-<div class="cat-album">
-	<?php foreach ($items as $key => $item): ?>
-		<div class="pic-album <?php echo $item['category'] ?>">
-			<div class="picture" id="<?php echo $item['product_id'] ?>">
-				<img src="<?php echo $item['product_image'] ?>" class="picture-inner original"/></br>
-				<div class="description"><?php echo $item['product_description']; ?></div>
-				<br/>
-				<div class="price"><?php echo 'Php '.number_format($item['price'],2,'.',','); ?></div>
-				<br/>
-				<?php if($item['category'] == 'onhand'): ?>
-					<div class="stocks"><?php echo $item['stocks']; ?></div>
-					<br/>
-				<?php endif; ?>
-				<button class="btn btn-sm btn-success edit">Edit</button>
-				<button class="btn btn-sm btn-danger remove">Remove</button>
-			</div>
-			<div style="display:none" id="<?php echo $item['product_id'] ?>">
-				<img src="<?php echo $item['product_image'] ?>" class="picture-inner upload"></br>
-				<input type="file"/>
-				<div class="image error">
-					The file chosen is not an image
-				</div><br/>
-				<input type="text" name="description"/>
-				<div class="description error">
-					Please specify an item description
-				</div><br/>
-				<input type="text" name="price"/>
-				<div class="price error">
-					Please specify an item price
-				</div><br/>
-				<div class="invalid-price error">
-					Please specify a valid positive item price without commas
-				</div><br/>
-				<?php if($item['category'] == 'onhand'): ?>
-					<input type="text" name="stocks"/>
-					<div class="stocks-error error">
-						Please specify an item quantity
-					</div><br/>
-					<div class="invalid-stocks error">
-						Please specify a valid positive item quantity
-					</div><br/>
-				<?php endif; ?>
-				<button class="btn btn-sm btn-success save">Save</button>
-				<button class="btn btn-sm btn-primary cancel">Cancel</button>
-			</div>
+<div class="container2">
+	<div class="row">
+		<div class="col-xs-12 col-md-8">
+			<h4 class="pull-left"> Hi Admin!</h4>
+			<a href="/admin?logout=1" role="button" class="btn btn-info btn-sm pull-right"><span class="glyphicon glyphicon-off"></span> Log Out</a> 
 		</div>
-	<?php endforeach; ?>
+	</div>
+	<div class="row">
+		<div class="col-sm-3 border-right item-categories">
+			<ul class="nav nav-tabs nav-stacked">
+				<li><a href="admin">Home</a></li>
+			  	<li><a href="add">Add Items</a></li>
+				<li class="active"><a href="products">View/Edit Products</a></li>
+				<li><a href="feedbacks">Feedbacks</a></li>
+				<li><a href="bogusbuyers">Bogus Buyers</a></li>
+			</ul>
+			<select name="category" class="form-control">
+				<option value="all">All</option>
+				<option value="dress">Dress</option>
+				<option value="gadgets">Gadgets</option>
+				<option value="jackets">Jackets</option>
+				<option value="jumpshorts">Jumpshorts</option>
+				<option value="onhand">Onhand Items</option>
+				<option value="pullovers">Pullovers</option>
+				<option value="shirts">Shirts</option>
+				<option value="skirts">Skirts</option>
+				<option value="soap">Soap</option>
+				<option value="tops">Tops</option>
+				<option value="bags">Bags</option>
+				<option value="pants">Pants</option>
+			</select>
+		</div>
+		<div class="col-sm-9">
+			<?php foreach ($items as $key => $item): ?>
+				<div class="pic-album <?php echo $item['category'] ?>">
+					<div class="picture" id="<?php echo $item['product_id'] ?>">
+						<img src="<?php echo $item['product_image'] ?>" class="picture-inner original"/></br>
+						<div class="description"><?php echo $item['product_description']; ?></div>
+						<br/>
+						<div class="price"><?php echo 'Php '.number_format($item['price'],2,'.',','); ?></div>
+						<br/>
+						<?php if($item['category'] == 'onhand'): ?>
+							<div class="stocks"><?php echo $item['stocks']; ?></div>
+							<br/>
+						<?php endif; ?>
+						<button class="btn btn-sm btn-success edit">Edit</button>
+						<button class="btn btn-sm btn-danger remove">Remove</button>
+					</div>
+					<div style="display:none" id="<?php echo $item['product_id'] ?>">
+						<img src="<?php echo $item['product_image'] ?>" class="picture-inner upload"></br>
+						<input type="file"/>
+						<div class="image error">
+							The file chosen is not an image
+						</div><br/>
+						<input type="text" name="description"/>
+						<div class="description error">
+							Please specify an item description
+						</div><br/>
+						<input type="text" name="price"/>
+						<div class="price error">
+							Please specify an item price
+						</div><br/>
+						<div class="invalid-price error">
+							Please specify a valid positive item price without commas
+						</div><br/>
+						<?php if($item['category'] == 'onhand'): ?>
+							<input type="text" name="stocks"/>
+							<div class="stocks-error error">
+								Please specify an item quantity
+							</div><br/>
+							<div class="invalid-stocks error">
+								Please specify a valid positive item quantity
+							</div><br/>
+						<?php endif; ?>
+						<button class="btn btn-sm btn-success save">Save</button>
+						<button class="btn btn-sm btn-primary cancel">Cancel</button>
+					</div>
+				</div>
+			<?php endforeach; ?>
+		</div>
+	</div>
 </div>
+
 <script type="text/javascript">
 	jQuery(function($){
 		$(".save").on("click",function(){
