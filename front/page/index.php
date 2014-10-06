@@ -26,7 +26,12 @@ class Front_Page_Index extends Front_Page {
 	public function render() {
 		if (!empty($_POST)){
 			if (isset($_POST['id'])){
-				$_SESSION['items'][$_POST['id']] = $_POST['id'];
+				if (isset($_SESSION['items'][$_POST['id']])) {
+					$_SESSION['items'][$_POST['id']] += $_POST['quantity'];
+				}				
+				else {
+					$_SESSION['items'][$_POST['id']] = $_POST['quantity'];
+				}	
 			}
 			else{
 				unset($_SESSION['items'][$_POST['remove']]);

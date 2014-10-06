@@ -13,7 +13,8 @@
 		<?php foreach ($items as $key => $item): ?>
 			<div class="picture" id="<?php echo $item['product_id'] ?>">
 				<img src="<?php echo $item['product_image'] ?>" class="picture-inner">
-				<p><?php echo $item['product_name'].'<br/>'; ?></p>
+				<p><?php echo $item['product_description']; ?></p>
+				<?php echo $item['quantity']; ?><br/>
 				<button class="btn btn-info">Remove from Cart</button>
 			</div>
 		<?php endforeach ?>
