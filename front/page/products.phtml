@@ -83,14 +83,16 @@
 				$(this).parent().find(".invalid-price").show();
 				error = true;
 			}
-			if ($(this).parent().find("input[name='stocks']").val().trim() == "") {
-				$(this).parent().find(".stocks-error").show();
-				error = true;
-			}
-			if ($(this).parent().find("input[name='stocks']").val().trim().search(/[^0-9]/) != -1 
-				|| isNaN($(this).parent().find("input[name='stocks']").val().trim())) {
-				$(this).parent().find(".invalid-stocks").show();
-				error = true;
+			if ($(this).parents(".pic-album").hasClass("onhand")) {
+				if ($(this).parent().find("input[name='stocks']").val().trim() == "") {
+					$(this).parent().find(".stocks-error").show();
+					error = true;
+				}
+				if ($(this).parent().find("input[name='stocks']").val().trim().search(/[^0-9]/) != -1 
+					|| isNaN($(this).parent().find("input[name='stocks']").val().trim())) {
+					$(this).parent().find(".invalid-stocks").show();
+					error = true;
+				}
 			}
 			if (!error) {
 				var fd = new FormData();
