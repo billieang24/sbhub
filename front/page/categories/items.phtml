@@ -11,7 +11,7 @@
 		 <li><a href="/categories/tops">Tops/Loose Tops</a></li>
 		 <li><a href="/categories/pullovers">Longsleeves</a></li>
 		 <li><a href="/categories/jackets">Cardigans</a></li>
-		 <li><a href="/categories/jumpshorts">Jumpsuits</a></br></li>
+		 <li><a href="/categories/jumpshorts">Jumpsuits</a><br/></li>
 	</ul>
 	<center>
 		<a href="/cart"><button class="btn btn-lg btn-warning" >
@@ -26,11 +26,12 @@
 		foreach ($items as $key => $item):
 	?><div class="pic-album">
 		<div class="picture" id="<?php echo $item['product_id'] ?>">
-		<img src="<?php echo $item['product_image'] ?>" class="picture-inner"></br>
-		<?php echo $item['product_name'].'<br/>'.'Php '.$item['price'].'<br/>'; ?>
+		<img src="<?php echo $item['product_image'] ?>" class="picture-inner"><br/>
+		<?php echo $item['product_description'].'<br/>'.'Php '.$item['price'].'<br/>'; ?>
 		<button class="btn btn-sm btn-danger">
 			<span class="glyphicon glyphicon-heart-empty"></span> Add to Cart
-		</button>
+		</button><br/>
+		QTY <input type="number" name="quantity" min="1" max="99" value="1"/>
 		</div>
 	</div>
 	<?php
@@ -43,11 +44,11 @@
 			$.ajax({
 				type: "POST",
 				url: "index",
-				data: {id: $(this).parent().attr("id")}
+				data: {id: $(this).parent().attr("id"), quantity: $(this).parent().find("input[type='number']").val()}
 			}).done(function(){
-				alert("Successfully added item!");
+				alert("Successfully added item to cart!");
 			}).fail(function(){
-				alert("Unable to add item!")
+				alert("Unable to add item to cart!")
 			});
 		});
 	});
