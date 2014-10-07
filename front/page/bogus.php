@@ -14,7 +14,7 @@ class Front_Page_Index extends Front_Page {
 	/* Protected Properties
 	-------------------------------*/
 	protected $_title = 'Style and Beauty Hub';
-	protected $_class = 'index';
+	protected $_class = 'home';
 	protected $_template = '/bogus.phtml';
 	
 	/* Private Properties
@@ -24,6 +24,9 @@ class Front_Page_Index extends Front_Page {
 	/* Public Methods
 	-------------------------------*/
 	public function render() {
+		$bogus = front()->bogusbuyers()->getList();
+		$this->_body = array(
+			'bogus' => 	$bogus);
 		return $this->_page();
 	}
 	

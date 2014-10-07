@@ -32,6 +32,9 @@ class Front_Page_Index extends Front_Page {
 				unset($_SESSION['items'][$_POST['remove']]);
 			}
 		}
+		$bogus = front()->bogusbuyers()->getLimit();
+		$this->_body = array(
+			'bogus' => 	$bogus);
 		return $this->_page();
 	}
 	

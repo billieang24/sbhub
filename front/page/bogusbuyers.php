@@ -15,7 +15,7 @@ class Front_Page_Index extends Front_Page {
 	-------------------------------*/
 	protected $_title = 'Style and Beauty Hub';
 	protected $_class = 'index';
-	protected $_template = '/customer.phtml';
+	protected $_template = '/bogusbuyers.phtml';
 	
 	/* Private Properties
 	-------------------------------*/
@@ -24,9 +24,19 @@ class Front_Page_Index extends Front_Page {
 	/* Public Methods
 	-------------------------------*/
 	public function render() {
-	$feedback = front()->feedbacks()->getList();
-		$this->_body = array(
-			'feedback' => 	$feedback);
+
+		if (!isset($_SESSION['admin'])){
+			header('Location:/login');
+		}
+		if (isset($_FILES['image'])){
+			move_uploaded_file(
+				$_FILES['image']['tmp_name'],
+				dirname(__FILE__).'/../../web/images/'.$_FILES['image']['name']."-".str_replace('/tmp/',"",($_FILES['image']['tmp_name'])));
+			front()
+				->bogusbuyers()
+				->create(
+					'/images/'.$_FILES['image']['name']."-".str_replace('/tmp/',"",($_FILES['image']['tmp_name'])));
+		}
 		return $this->_page();
 	}
 	

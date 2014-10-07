@@ -58,13 +58,14 @@
     <div id="collapseOne" class="panel-collapse collapse in">
       <div class="panel-body">
         <!-- thumbnail -->
-        <div class="row">
-		  <div class="col-sm-2 col-md-2">
-		    <div class="thumbnail">
-				<img src="\images\bpi.jpg">	
-		      <div class="caption">
-		      </div>
-		    </div>
+        <div class="row-fluid">
+		  <?php foreach ($bogus as $key => $boguses): ?>
+			  <div class="col-sm-2 col-md-3">
+			    <div class="thumbnail">
+					<img src="<?php echo $boguses['bogusbuyer_image'] ?>"/>
+			    </div>
+			  </div>
+		<?php endforeach; ?>
 		  </div>
 		</div>
 		<!-- endthumbnails -->

@@ -1,29 +1,12 @@
-<div class="album">
+<div class="row-fluid container2">
 	<h2>Proof of Purchase & Happy Customers</h2>
-    <div class="row pull-left">
-		  <div class="col-sm-4 col-md-4">
-		    <div class="thumbnail">
-				<img src="\images\bpi.jpg">
-		    </div>
-		  </div>
-	<!-- </div>
-	 <div class="row pull-left">
- -->		  <div class="col-sm-4 col-md-4">
-		    <div class="thumbnail">
-				<img src="\images\bpi.jpg">
-		    </div>
-		  </div>
-	<!--</div> 
-	 <div class="row pull-left"> -->
-		  <div class="col-sm-4 col-md-4">
-		    <div class="thumbnail">
-				<img src="\images\bpi.jpg">
-		    </div>
-		  </div>
-		  <div class="col-sm-4 col-md-4">
-		    <div class="thumbnail">
-				<img src="\images\bpi.jpg">
-		    </div>
-		  </div>
+    <div class="pull-left">
+		  <?php foreach ($feedback as $key => $feedbacks): ?>
+			  <div class="col-sm-4 col-md-4">
+			    <div class="thumbnail">
+					<img src="<?php echo $feedbacks['feedbacks_image'] ?>"/>
+			    </div>
+			  </div>
+		<?php endforeach; ?>
 	</div>
 </div>

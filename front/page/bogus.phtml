@@ -1,29 +1,12 @@
-<div class="album">
+<div class="row-fluid container2">
 	<h2>Bogus buyers</h2>
-    <div class="row pull-left">
-		  <div class="col-sm-4 col-md-4">
-		    <div class="thumbnail">
-				<img src="\images\bpi.jpg">
-		    </div>
-		  </div>
-	<!-- </div>
-	 <div class="row pull-left">
- -->		  <div class="col-sm-4 col-md-4">
-		    <div class="thumbnail">
-				<img src="\images\bpi.jpg">
-		    </div>
-		  </div>
-	<!--</div> 
-	 <div class="row pull-left"> -->
-		  <div class="col-sm-4 col-md-4">
-		    <div class="thumbnail">
-				<img src="\images\bpi.jpg">
-		    </div>
-		  </div>
-		  <div class="col-sm-4 col-md-4">
-		    <div class="thumbnail">
-				<img src="\images\bpi.jpg">
-		    </div>
-		  </div>
+    <div class="pull-left">
+    	<?php foreach ($bogus as $key => $boguses): ?>
+			  <div class="col-sm-4 col-md-4">
+			    <div class="thumbnail">
+					<img src="<?php echo $boguses['bogusbuyer_image'] ?>"/>
+			    </div>
+			  </div>
+		<?php endforeach; ?>
 	</div>
-</div>
+</div>	

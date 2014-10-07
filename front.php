@@ -390,7 +390,13 @@ class Front extends Eden {
 	
 	public function admins() {
 		return new Admins($this->database());
-	}	
+	}
+	public function bogusbuyers() {
+		return new Bogusbuyers($this->database());
+	}
+	public function feedbacks() {
+		return new Feedbacks($this->database());
+	}
 	
 	/* Protected Methods
 	-------------------------------*/
